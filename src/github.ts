@@ -8,11 +8,13 @@ export async function createReleaseDraft(
   repoToken: string,
   changeLog: string
 ): Promise<string> {
-  const octokit = new github.Github(repoToken);
+
+  const octokit = github.getOctokit(repoToken)
+
   const response = await octokit.repos.createRelease({
-    owner: 'github.context.repo.owner',
-    repo: 'github.context.repo.repo',
-    tag_name: 'versionTag',
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+    tag_name: versionTag,
     name: version.removePrefix(versionTag),
     body: markdown.toUnorderedList(changeLog),
     prerelease: version.isPrerelease(versionTag),
