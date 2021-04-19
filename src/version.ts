@@ -1,7 +1,7 @@
 import * as semver from 'semver'
 
 export function isSemVer(version: string): boolean {
-  return semver.valid(version) !== null;
+  return semver.valid(version) !== null
 }
 
 export function isPrerelease(version: string): boolean {

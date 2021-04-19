@@ -8,7 +8,6 @@ export async function createReleaseDraft(
   repoToken: string,
   changeLog: string
 ): Promise<string> {
-
   const octokit = github.getOctokit(repoToken)
 
   const response = await octokit.repos.createRelease({
@@ -21,6 +20,7 @@ export async function createReleaseDraft(
     draft: true
   })
 
+  // eslint-disable-next-line eqeqeq
   if (response.status != 201) {
     throw new Error(`Failed to create the release: ${response.status}`)
   }
